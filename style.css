@@ -1,0 +1,17 @@
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+input{
+    width: 500px;
+}
+
+td{
+    border: 1px solid black;
+    
+}
