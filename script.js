@@ -105,14 +105,18 @@ function updateItem(key) {
   };
 }
 
-function deleteItem(event) {
-    const row = event.target.parentNode.parentNode; 
-    const tableBody = document.querySelector('#yourTableId tbody');
-    tableBody.removeChild(row);
-  }
+function deleteItem(key) {
+  const transaction = db.transaction(["tableName"], "readwrite");
+  const objectStore = transaction.objectStore("tableName");
 
-  document.getElementById('yourTableId').addEventListener('click', function(event) {
-    if (event.target.classList.contains('action')) {
-      deleteItem(event);
-    }
-});
+  const request = objectStore.delete(key);
+  request.onsuccess = function () {
+    alert("Запись успешно удалена");
+    updateTable();
+  };
+
+  request.onerror = function () {
+    alert("Ошибка при удалении записи");
+  };
+}
+
